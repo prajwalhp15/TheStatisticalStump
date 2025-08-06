@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cricket Player Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('/static/icc.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.95);
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0c59c5;
+        }
+
+        h2, h3 {
+            text-align: center;
+            color: #fff;
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .metrics {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .metrics p {
+            line-height: 1.6;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .metrics p:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>🏏 Player Performance Predictor</h1>
+    <form action="/predict" method="post">
+        <input name="innings" placeholder="Innings" required><br>
+        <input name="runs" placeholder="Runs" required><br>
+        <input name="balls" placeholder="Balls Faced" required><br>
+        <input name="sr" placeholder="Strike Rate" required><br>
+        <input name="fours" placeholder="4s" required><br>
+        <input name="sixes" placeholder="6s" required><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+    <h2>Prediction: {{ prediction }}</h2>
+    {% endif %}
+
+
+
+
+
+
+
+
+    
+
+    <h3>📊 Model Comparison</h3>
+    <div class="metrics">
+        {% for model, scores in metrics.items() %}
+            <p><strong>{{ model }}</strong><br>
+            Accuracy: {{ scores["Accuracy"] }} |
+            Precision: {{ scores["Precision"] }} |
+            Recall: {{ scores["Recall"] }} |
+            F1 Score: {{ scores["F1 Score"] }}</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
